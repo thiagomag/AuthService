@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: AuthService
+  r2dbc:
+    url: r2dbc:pool:postgresql://postgres:postgres@localhost:5432/auth_service
+    password: postgres
+    username: postgres
+
+  webflux:
+    base-path: /auth-service
+
+api:
+  security:
+    token:
+      secret: mySecret
+
