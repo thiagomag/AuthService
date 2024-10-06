@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:  # Deploy manual
 
 jobs:
   build:
@@ -39,6 +40,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    environment: production  # Especifica o environment "production" para este job
+    if: github.event_name == 'workflow_dispatch'  # Executa o deploy apenas manualmente
 
     steps:
       - name: Checkout code
