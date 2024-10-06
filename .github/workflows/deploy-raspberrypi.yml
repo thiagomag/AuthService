@@ -31,7 +31,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker buildx build --platform linux/arm64 -t your-dockerhub-username/auth-service:latest --push .
+          docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/auth-service:latest --push .
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,7 +50,7 @@ jobs:
           username: ${{ secrets.RPI_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull your-dockerhub-username/auth-service:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/auth-service:latest
             docker stop auth-service || true
             docker rm auth-service || true
-            docker run -d --name auth-service -p 8080:8080 your-dockerhub-username/auth-service:latest
+            docker run -d --name auth-service -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/auth-service:latest
