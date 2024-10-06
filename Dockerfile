@@ -1,4 +1,4 @@
-FROM gradle:8.3-jdk21 AS build
+FROM 8.10.2-jdk21-alpine AS build
 WORKDIR /app
 COPY . .
 RUN gradle build --no-daemon
